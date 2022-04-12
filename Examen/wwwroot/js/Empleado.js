@@ -52,11 +52,11 @@ $('#tbl_empleado').on('click', '.btn_habilida', function () {
     $('#idEmpleado').val($(this).closest('tr').find('td').eq(0).html());
 });
 $('#btn_guardar').on('click', function () {
-    //if (validar_requeridos() == true) {
+    if (validar_requeridos() == true) {
         $('#md_confirmar_accion').modal('show');
-    //} else {
-      //  alert('Datos incompletos o erroneos, verificar formulario');
-    //}
+    } else {
+        alert('Datos incompletos o erroneos, verificar formulario');
+    }
 
 });
 $('#btn_guardar_habilidades').on('click', function () {
@@ -273,4 +273,38 @@ function obtenerHabilidades_grl() {
         alert('Ocurrio un error al procesar la información')
 
     })
+}
+function validar_requeridos() {
+    var flag = 0;
+    if ($("#Correo").val() != '' && $("#Correo").val() != null) {
+        if (($("#Correo").val().indexOf('@', 0) == -1 ||
+            $("#Correo").val().indexOf('.', 0) == -1) &&
+            $('#Correo').val() != '') {
+            flag += 1;
+            $('#lbl_correo').html('* formato incorrecto');
+            $('#lbl_correo').addClass('text-danger');
+            $("#Correo").addClass('is-invalid');
+        } else {
+            $('#lbl_correo').html('Correo:');
+            $('#lbl_correo').removeClass('text-danger');
+            $("#Correo").removeClass('is-invalid');
+        }
+        
+    } else {
+        flag += 1;
+        $('#lbl_correo').html('* Correo');
+        $('#lbl_correo').addClass('text-danger');
+        $("#Correo").addClass('is-invalid');
+    }
+    if ($('#slt_area_emp').val() != null && $('#slt_area_emp').val() != 0) {
+        $('#lbl_area').html('Area:');
+        $('#lbl_area').removeClass('text-danger');
+        $("#slt_area_emp").removeClass('is-invalid');
+    } else {
+        flag += 1;
+        $('#lbl_area').html('* Area(requerido)');
+        $('#lbl_area').addClass('text-danger');
+        $("#slt_area_emp").addClass('is-invalid');
+    }
+    return flag > 0 ? false : true;
 }
