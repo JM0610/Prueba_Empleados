@@ -40,5 +40,10 @@ namespace Examen.Services
             return await _Context.EmpleadoHabilidad.Select(x => new { x.IdEmpleado, x.NombreHabilidad })
                         .Where(x => x.IdEmpleado.Equals(id)).ToListAsync();
         }
+        public async Task<dynamic> GetHabilidades()
+        {
+            return await _Context.EmpleadoHabilidad.Select(x => x.NombreHabilidad).Distinct().ToListAsync();
+        }
+
     }
 }

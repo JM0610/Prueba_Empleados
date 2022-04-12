@@ -1,6 +1,7 @@
 ﻿$(document).ready(function () {
     obtener_area();
     obtener_jefe();
+    obtenerHabilidades_grl();
 });
 var flag = 0;
 $('#btn_nuevo').on('click', function () {
@@ -252,6 +253,21 @@ function obtenerHabilidades() {
         $('#section_habilidades').html('')
         $(data).each(function (item, val) {
             $('#section_habilidades').append('<h5 class="col-12">'+val.nombreHabilidad+'</h5>')
+        });
+    }).fail(function () {
+        alert('Ocurrio un error al procesar la información')
+
+    })
+}
+function obtenerHabilidades_grl() {
+    $.ajax({
+        url: '../Habilidad/GetHabilidades',
+        type: 'Get'
+    }).done(function (data) {
+        console.log(data);
+        
+        $(data).each(function (item, val) {
+            $('#slt_habilidad').append('<option>' + val + '</option>')
         });
     }).fail(function () {
         alert('Ocurrio un error al procesar la información')

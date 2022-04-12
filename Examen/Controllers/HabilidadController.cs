@@ -29,5 +29,12 @@ namespace Examen.Controllers
         {
             return await _Habilidad.GetHabilidad(id);
         }
+        [HttpGet]
+        public async Task<dynamic> GetHabilidades()
+        {
+            var a = await _Habilidad.GetHabilidades();
+            Console.WriteLine(a);
+            return a;
+        }
     }
 }

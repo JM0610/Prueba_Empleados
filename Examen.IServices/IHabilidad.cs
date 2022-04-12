@@ -10,5 +10,6 @@ namespace Examen.IServices
     {
         Task<bool> AddHabilidad(EmpleadoHabilidad _Habilidad);
         Task<dynamic> GetHabilidad(int id);
+        Task<dynamic> GetHabilidades();
     }
 }
