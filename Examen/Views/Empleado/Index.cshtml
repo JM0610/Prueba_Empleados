@@ -1,0 +1,309 @@
+﻿@model Examen.Models.Data.PaginadorGenerico<Examen.Models.Models.Empleado>
+@{
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<form id="frm_area" method="get" action=@Url.Action("Index", "Empleado" )>
+    <div class="card">
+        <div class="card-header text-center">
+            Detalle de empleados
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <h2>
+                        Empleados registrados
+                    </h2>
+                </div>
+                <div class="col-md-6">
+                    <button type="button" id="btn_nuevo" class="btn btn-primary float-lg-right mb-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                        </svg>                    Nuevo
+                    </button>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-6 col-sm-12">
+                    <label>Area:</label>
+                    <select id="idArea" name="idArea" class="form-control" onchange="this.form.submit()"></select>
+                </div>
+
+            </div>
+            <br />
+
+            <table class="table table-sm table-responsive table-striped" width="100%" id="tbl_empleado">
+                <thead>
+                    <tr>
+                        <th width="1%">Código</th>
+                        <th width="55%">Nombre completo</th>
+                        <th width="15%">Cedula</th>
+                        <th width="25%">Correo</th>
+                        <th width="1%"></th>
+                        <th width="1%"></th>
+                        <th width="1%"></th>
+                        <th width="1%"></th>
+                        <th style="display:none;"></th>
+                        <th style="display:none;"></th>
+                        <th style="display:none;"></th>
+                        <th style="display:none;"></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{ foreach (var item in Model.Resultado)
+                        {
+
+                                        <tr>
+                                            <td width="1%">
+                                                @item.IdEmpleado
+                                            </td>
+                                            <td width="56%">@item.NombreCompleto.Trim()</td>
+                                            <td width="15%">@item.Cedula.ToString().Trim()</td>
+                                            <td width="25%">@item.Correo.ToString().TrimEnd()</td>
+                                            <td width="1%">
+                                                <button type="button" class="btn btn-primary btn_actualizar" data-toggle="tooltip" data-placement="top" title="modificar">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                                        <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                                        <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                                                    </svg>
+                                                </button>
+                                            </td>
+                                            <td width="1%">
+                                                <button type="button" class="btn btn-warning btn_eliminar" data-toggle="tooltip" data-placement="top" title="Eliminar">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+                                                        <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+                                                    </svg>
+                                                </button>
+                                            </td>
+                                            <td width="1%">
+                                                <button type="button" class="btn btn-success btn_ver" data-toggle="tooltip" data-placement="top" title="ver datos">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                                                        <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
+                                                        <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
+                                                    </svg>
+                                                </button>
+                                            </td>
+                                            <td width="1%">
+                                                <button type="button" class="btn btn-info btn_habilida" data-toggle="tooltip" data-placement="top" title="agregar habilidad">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+                                                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
+                                                    </svg>
+                                                </button>
+                                            </td>
+                                            <td style="display:none;">@item.IdArea</td>
+                                            <td style="display:none;">@item.IdJefe</td>
+                                            <td style="display:none;">@item.FechaIngreso.ToString("yyyy-MM-dd")</td>
+                                            <td style="display:none;">@item.FechaNacimiento.ToString().Substring(0, 10)</td>
+                                            <td></td>
+                                        </tr>
+                        } }
+                </tbody>
+            </table>
+        </div>
+        <div class="card-footer">
+            @if (Model.Resultado.Count() > 0)
+            {
+                <span>
+                    <strong>@Model.TotalRegistros</strong> registros encontrados
+                </span>
+                <span>&nbsp;|&nbsp;</span>
+                <span>
+                    Página <strong>@(Model.PaginaActual)</strong> de
+                    <strong>@Model.TotalPaginas</strong>
+                </span>
+                <span>&nbsp;|&nbsp;</span>
+            }
+            else
+            {
+                <span>No hay resultados para esta búsqueda</span>
+                <span>&nbsp;|&nbsp;</span>
+            }
+
+            @if (Model.PaginaActual > 1)
+            {
+                @Html.ActionLink("<<", "Index", new { pagina = 1,idArea=ViewBag.valor, busqueda = Model.Busqueda },
+                                new { @class = "btn btn-sm btn-default" })
+                <span></span>
+                @Html.ActionLink("Anterior", "Index", new { pagina = Model.PaginaActual - 1, ViewBag.valor, busqueda = Model.Busqueda },
+                                new { @class = "btn btn-sm btn-default" })
+            }
+            else
+            {
+                @Html.ActionLink("<<", "Index", new { pagina = 1, ViewBag.valor, busqueda = Model.Busqueda },
+                                new { @class = "btn btn-sm btn-default disabled" })
+                <span></span>
+                @Html.ActionLink("Anterior", "Index", new { pagina = 1, ViewBag.valor, busqueda = Model.Busqueda },
+                                new { @class = "btn btn-sm btn-default disabled" })
+            }
+            <span></span>
+            @if (Model.PaginaActual < Model.TotalPaginas)
+            {
+                @Html.ActionLink("Siguiente", "Index", new { pagina = Model.PaginaActual + 1, ViewBag.valor, busqueda = Model.Busqueda },
+                                new { @class = "btn btn-sm btn-default" })
+                <span></span>
+                @Html.ActionLink(">>", "Index", new { pagina = Model.TotalPaginas, ViewBag.valor, busqueda = Model.Busqueda },
+                                new { @class = "btn btn-sm btn-default" })
+            }
+            else
+            {
+                @Html.ActionLink("Siguiente", "Index    ", new { pagina = Model.TotalPaginas - 1, ViewBag.valor, busqueda = Model.Busqueda },
+                                new { @class = "btn btn-sm btn-default disabled" })
+                <span></span>
+                @Html.ActionLink(">>", "Index", new { pagina = Model.TotalPaginas, ViewBag.valor, busqueda = Model.Busqueda },
+                                new { @class = "btn btn-sm btn-default disabled" })
+            }
+        </div>
+    </div>
+</form>
+@*Seccion para operaciones guardar actualizar*@
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="md_empleado">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            @await Html.PartialAsync("Formulario_General")
+        </div>
+
+    </div>
+</div>
+@*Modal para confirmar*@
+<div class="modal fade" id="md_confirmar_accion" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                Confirmación
+            </div>
+            <div class="modal-body">
+                Desea confirmar confirmar la operación
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn_cancelar" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="btn_procesar">Procesar</button>
+            </div>
+        </div>
+    </div>
+</div>
+@*confirmar*@
+<div class="modal fade" id="md_confirmar_accion" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                Confirmación
+            </div>
+            <div class="modal-body">
+                Desea confirmar confirmar la operación
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn_cancelar" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="btn_procesar">Procesar</button>
+            </div>
+        </div>
+    </div>
+</div>
+@*seccion datos generales*@
+<div class="modal fade bd-example-modal-md" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="md_emp_grl">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="card">
+                <div class="card-header">
+                    Datos generales
+                </div>
+
+                <div class="card-body">
+                    <div class="row">
+
+                        <div class="col-md-4 col-sm-12"><label>Codigo:</label></div>
+                        <div class="col-md-8 col-sm-12"><label id="lbl_codigo"></label></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 col-sm-12">Nombre:</div>
+                        <div class="col-md-8 col-sm-12"><label id="lbl_nombre"></label></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 col-sm-12">Número de cedula</div>
+                        <div class="col-md-8 col-sm-12"><label id="lbl_celula"></label></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 col-sm-12">Correo</div>
+                        <div class="col-md-8 col-sm-12"><label id="lbl_correo_grl"></label></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 col-sm-12">Fecha de nacimiento</div>
+                        <div class="col-md-8 col-sm-12"><label id="fecha_nacimiento"></label></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 col-sm-12">Fecha ingreso</div>
+                        <div class="col-md-8 col-sm-12"><label id="fecha_ingreso"></label></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 col-sm-12">Jefe</div>
+                        <div class="col-md-8 col-sm-12"><label id="lbl_jefe_grl"></label></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 col-sm-12">Area:</div>
+                        <div class="col-md-8 col-sm-12"><label id="lbl_area_grl"></label></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 col-sm-12">Edad</div>
+                        <div class="col-md-8 col-sm-12"><label id="lbl_edad_grl"></label></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 col-sm-12">Años en la empresa</div>
+                        <div class="col-md-8 col-sm-12"><label id="lbl_tiempo_grl"></label></div>
+                    </div>
+                    <hr />
+                    <label>Habilidades</label>
+                    <div class="row" id="section_habilidades">
+                        
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+@*seccion para habilidades*@
+<div class="modal fade" id="md_habilidades" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                Habilidades del empleado
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <label>Seleccione o digite una habilidad</label>
+                    <div class="form-group col-12">
+                        <label id="lbl_habilidad">Habilidades:</label>
+                        <select class="form-control" id="slt_habilidad"></select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label id="lbl_habilidad_text">Digite habilidad:</label>
+                    <div class="input-group">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-card-text" viewBox="0 0 16 16">
+                                    <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z" />
+                                    <path d="M3 5.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM3 8a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 8zm0 2.5a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5z" />
+                                </svg>
+                            </div>
+                        </div>
+                        <input type="text" class="form-control" id="txt_habilidad"/>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn_cancelar_habilidades" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="btn_guardar_habilidades">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script src="~/js/Empleado.js"></script>
+
+}

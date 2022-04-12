@@ -1,0 +1,179 @@
+﻿@model Examen.Models.Data.PaginadorGenerico<Examen.Models.Models.Area>
+@{
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<form id="frm_area" method="get" action=@Url.Action("Index", "Area" )>
+    <div class="card">
+        <div class="card-header text-center">
+            Detalle de areas
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <h2>
+                        Areas registradas
+                    </h2>
+                </div>
+                <div class="col-md-6">
+                    <button type="button" id="btn_nuevo" class="btn btn-primary float-lg-right mb-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                        </svg>                    Nuevo
+                    </button>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="form-group col-12">
+                    <div class="input-group">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                                </svg>
+                            </div>
+                        </div>
+                        @Html.TextBox("busqueda", null, new
+                    {
+                        placeholder = "Digite el valor a buscar y presione enter",
+                                            @class = "form-control col-md-6 col-sm-12"
+                    })
+                    </div>
+                </div>
+
+            </div>
+            <br />
+
+            <table class="table table-sm table-responsive table-striped" width="100%" id="tbl_area">
+                <thead class="thead-light">
+                    <tr>
+                        <th width="1%">Código</th>
+                        <th width="30%">Nombre</th>
+                        <th width="67%" class="table-hover">Descripción</th>
+                        <th width="1%"></th>
+                        <th width="1%"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Resultado)
+                    {
+                        <tr>
+                            <td width="1%">
+                                @Html.DisplayFor(modelItem => item.IdArea)
+                            </td>
+                            <td width="30%">@Html.DisplayFor(modelItem => item.Nombre)</td>
+                            <td class="table-hover">@Html.DisplayFor(modelItem => item.Descripcion)</td>
+                            <td width="1%">
+                                <button type="button" class="btn btn-primary btn_actualizar">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                        <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                        <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                                    </svg>
+                                </button>
+                            </td>
+                            <td width="1%">
+                                <button type="button" class="btn btn-warning btn_eliminar">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+                                        <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+                                    </svg>
+                                </button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="card-footer">
+            @if (Model.Resultado.Count() > 0)
+            {
+                <span>
+                    <strong>@Model.TotalRegistros</strong> registros encontrados
+                </span>
+                <span>&nbsp;|&nbsp;</span>
+                <span>
+                    Página <strong>@(Model.PaginaActual)</strong> de
+                    <strong>@Model.TotalPaginas</strong>
+                </span>
+                <span>&nbsp;|&nbsp;</span>
+            }
+            else
+            {
+                <span>No hay resultados para esta búsqueda</span>
+                <span>&nbsp;|&nbsp;</span>
+            }
+
+            @if (Model.PaginaActual > 1)
+            {
+                @Html.ActionLink("<<", "Index", new { pagina = 1, busqueda = Model.Busqueda },
+                                new { @class = "btn btn-sm btn-default" })
+                <span></span>
+                @Html.ActionLink("Anterior", "Index", new { pagina = Model.PaginaActual - 1, busqueda = Model.Busqueda },
+                                new { @class = "btn btn-sm btn-default" })
+            }
+            else
+            {
+                @Html.ActionLink("<<", "Index", new { pagina = 1, busqueda = Model.Busqueda },
+                                new { @class = "btn btn-sm btn-default disabled" })
+                <span></span>
+                @Html.ActionLink("Anterior", "Index", new { pagina = 1, busqueda = Model.Busqueda },
+                                new { @class = "btn btn-sm btn-default disabled" })
+            }
+            <span></span>
+            @if (Model.PaginaActual < Model.TotalPaginas)
+            {
+                @Html.ActionLink("Siguiente", "Index", new { pagina = Model.PaginaActual + 1, busqueda = Model.Busqueda },
+                                new { @class = "btn btn-sm btn-default" })
+                <span></span>
+                @Html.ActionLink(">>", "Index", new { pagina = Model.TotalPaginas, busqueda = Model.Busqueda },
+                                new { @class = "btn btn-sm btn-default" })
+            }
+            else
+            {
+                @Html.ActionLink("Siguiente", "Index    ", new { pagina = Model.TotalPaginas - 1, busqueda = Model.Busqueda },
+                                new { @class = "btn btn-sm btn-default disabled" })
+                <span></span>
+                @Html.ActionLink(">>", "Index", new { pagina = Model.TotalPaginas, busqueda = Model.Busqueda },
+                                new { @class = "btn btn-sm btn-default disabled" })
+            }
+        </div>
+    </div>
+</form>
+@*Seccion para operaciones guardar actualizar*@
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="md_area">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            @await Html.PartialAsync("Formulario_General")
+        </div>
+
+    </div>
+</div>
+@*Modal para confirmar*@
+<div class="modal fade" id="md_confirmar_accion" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                Confirmación
+            </div>
+            <div class="modal-body">
+                Desea confirmar confirmar la operación
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn_cancelar" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="btn_procesar">Procesar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+
+
+    <script src="~/js/Area.js"></script>
+
+
+
+}
