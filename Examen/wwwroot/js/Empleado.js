@@ -27,11 +27,12 @@ $('#tbl_empleado').on('click', '.btn_actualizar', function () {
     $('#NombreCompleto').val($(this).closest('tr').find('td').eq(1).html())
     $('#Cedula').val($(this).closest('tr').find('td').eq(2).html())
     $('#Correo').val($(this).closest('tr').find('td').eq(3).html())
-    $('#Fechanacimiento').val($(this).closest('tr').find('td').eq(9).html())
-    $('#Fechaingreso').val($(this).closest('tr').find('td').eq(8).html())
-    $('#slt_jefe').val($(this).closest('tr').find('td').eq(7).html())
-    $('#slt_area_emp').val($(this).closest('tr').find('td').eq(6).html())
-    console.log($(this).closest('tr').find('td').eq(8).html())
+    $('#Fechanacimiento').val($(this).closest('tr').find('td').eq(11).html())
+    $('#Fechaingreso').val($(this).closest('tr').find('td').eq(10).html())
+    $('#slt_jefe').val($(this).closest('tr').find('td').eq(9).html())
+    $('#slt_area_emp').val($(this).closest('tr').find('td').eq(8).html())
+    
+    console.log($(this).closest('tr').find('td').eq(6).html())
 });
 $('#tbl_empleado').on('click', '.btn_eliminar', function () {
     flag = 3;
